@@ -22,7 +22,7 @@
 			<li><a href="/signup">SignUp</a></li>
 			<li><a href="/login">Login</a></li>
 			{:else}
-			<li><a href="/">Documents</a></li>
+			<li><a href="/list">Documents</a></li>
 			<li><a href="/new">New Document</a></li>
 			<li><button on:click={doLogout}>Logout</button></li>
 			{/if}

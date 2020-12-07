@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: membrain
+    env: static
+    branch: main
+    buildCommand: yarn && yarn build
+    staticPublishPath: public

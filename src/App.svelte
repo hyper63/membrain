@@ -34,8 +34,13 @@
 		<h1>MEMBRAIN</h1>	
 		<p>Welcome to membrain!</p>
 		<p>Membrain allows users to store small documents in an end to end encrypted environment for safe keeping.</p>
+		{#if !$loggedIn}
 		<a href="/signup"><b>Sign Up</b></a>
 		<a href="/login"><b>Login</b></a>
+		{:else}
+		<a href="/list"><b>Documents</b></a>
+		<a href="/new"><b>New Document</b></a>
+		{/if}
 	</Route>
 	<Route path="/signup"><Signup /></Route>
 	<Route path="/login"><Login /></Route>

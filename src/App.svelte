@@ -29,7 +29,7 @@
 		</ul>
 	</nav>
 </header>
-<main>
+<main style="max-width: var(--width-content);">
 	<Route path="/">
 		<h1>MEMBRAIN</h1>	
 		<p>Welcome to membrain!</p>
@@ -51,10 +51,13 @@
 </main>
 
 <style>
+	header {
+		height: 72px;
+	}
 	main {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
+		
 		margin: 0 auto;
 	}
 

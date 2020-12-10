@@ -28,22 +28,28 @@
 <section>
   <aside>
     <nav>
+      <h3>{doc.name}</h3>
       <ul>
         <li><a href="/list"><b>List</b></a></li>
         <li><a href="/edit/{id}"><b>Edit</b></a></li>
         <li><button on:click={remove}>Delete</button></li>
       </ul>
     </nav>
+    <article>
+      <h3>{doc.description}</h3>
+      <pre>{doc.content}</pre>
+      <h5>{doc.tags}</h5>
+    </article>
+    
   </aside>
 </section>
-<article>
-  <h1>{doc.name}</h1>
-  <h3>{doc.description}</h3>
-  <pre>{doc.content}</pre>
-  <h5>{doc.tags}</h5>
-</article>
 <style>
+  
   aside {
     width: 100%;
+  }
+
+  article {
+    text-align: left;
   }
 </style>

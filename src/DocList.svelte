@@ -1,27 +1,24 @@
 <script>
-  import { store, loggedIn } from './store'
-  import { pathOr } from 'ramda'
-  import { router } from 'tinro'
+  import { store, loggedIn } from "./store";
+  import { pathOr } from "ramda";
+  import { router } from "tinro";
+  import Card from "./components/Card.svelte";
 
-  if (!$loggedIn) { router.goto('/') }
+  if (!$loggedIn) {
+    router.goto("/");
+  }
 </script>
+
+<style>
+</style>
+
 <h1>Your Documents</h1>
 <section>
-  {#each $store as {item, itemId}}
-    <aside>
-      <a href="/show/{itemId}">{pathOr('noname', ['doc', 'name'], item)}</a>
-      <p>{pathOr('description', ['doc', 'description'], item)}</p>
-    </aside>
+  {#each $store as { item, itemId }}
+    <Card
+      href="/show/{itemId}"
+      name={pathOr('noname', ['doc', 'name'], item)}
+      description={pathOr('description', ['doc', 'description'], item)}
+      tags={pathOr([], ['doc', 'tags'], item)} />
   {/each}
 </section>
-<style>
-  header {
-    margin: 0;
-    padding: 0;
-  }
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-</style>

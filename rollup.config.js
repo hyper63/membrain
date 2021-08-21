@@ -5,7 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import replace from '@rollup/plugin-replace';
-import {config} from 'dotenv'
+import { config } from 'dotenv'
 
 config()
 
@@ -70,7 +70,10 @@ export default {
 
 		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('public'),
+		!production && livereload({
+			watch: 'public',
+			clientUrl: process.env.CLIENT_URL
+		}),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify

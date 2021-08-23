@@ -22,9 +22,9 @@
     content,
     tags = "";
 
-  // if (!$loggedIn) {
-  //   router.goto("/");
-  // }
+  if (!$loggedIn) {
+    router.goto("/");
+  }
 
   const { id } = router.params();
 
@@ -231,7 +231,9 @@
           class="space-y-8 divide-y divide-gray-200"
           on:submit|preventDefault={handleSubmit}
         >
-          <Error {error} />
+          {#if error}
+            <Error {error} />
+          {/if}
           <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
             <div class="sm:col-span-4">
               <label for="name" class="block text-sm font-medium text-gray-700"
@@ -239,42 +241,70 @@
               >
               <div class="mt-1 flex rounded-md shadow-sm">
                 <input
-                  class="flex-1 focus:ring-yellow-500 focus:border-yellow-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                  class="flex-1 focus:ring-yellow-500 focus:border-yellow-500 block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300"
                   bind:value={name}
                   id="name"
                   type="text"
                 />
               </div>
             </div>
-            <div>
-              <label for="description">Description</label>
-              <textarea
-                bind:value={description}
-                id="description"
-                style="height: 100px"
-              />
-            </div>
-            <div>
-              <label for="content">Content</label>
-              <textarea
-                bind:value={content}
-                id="content"
-                style="height: 400px"
-              />
-            </div>
-            <div>
-              <label for="tags">Tags</label>
-              <input bind:value={tags} id="tags" type="text" />
-            </div>
-            <div class="buttons">
-              <button
-                class="bg-yellow-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                type="submit">Submit</button
+            <div class="sm:col-span-4">
+              <label
+                for="description"
+                class="block text-sm font-medium text-gray-700"
+                >Description</label
               >
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <textarea
+                  class="shadow-sm focus:ring-yellow-500 focus:border-yellow-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                  bind:value={description}
+                  id="description"
+                  style="height: 100px"
+                />
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label
+                for="content"
+                class="block text-sm font-medium text-gray-700">Content</label
+              >
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <textarea
+                  class="shadow-sm focus:ring-yellow-500 focus:border-yellow-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+                  bind:value={content}
+                  id="content"
+                  style="height: 400px"
+                />
+              </div>
+            </div>
+            <div class="sm:col-span-4">
+              <label for="tags" class="block text-sm font-medium text-gray-700"
+                >Tags</label
+              >
+              <div class="mt-1 flex rounded-md shadow-sm">
+                <input
+                  bind:value={tags}
+                  id="tags"
+                  type="text"
+                  class="flex-1 focus:ring-yellow-500 focus:border-yellow-500 block w-full min-w-0 rounded-none rounded-md sm:text-sm border-gray-300"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="pt-5 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-4 flex justify-end">
               <a
-                class="bg-yellow-900 text-white px-3 py-2 rounded-md text-sm font-medium"
-                href="/list">Cancel</a
+                href="/list"
+                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
               >
+                Cancel
+              </a>
+              <button
+                type="submit"
+                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+              >
+                Save
+              </button>
             </div>
           </div>
         </form>

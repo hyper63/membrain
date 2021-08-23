@@ -1,6 +1,7 @@
 <script>
   import { loggedIn, store, set } from "./store.js";
   import { router } from "tinro";
+  import Error from "./components/Error.svelte";
 
   let submitting = false;
   let username,
@@ -31,79 +32,106 @@
   }
 </script>
 
-<style>
-  h1 {
-    color: var(--color);
-    font-family: Poppins;
-    font-weight: 600;
-  }
-  section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: var(--justify-important);
-  }
-
-  section form {
-    border: 1px solid var(--color-bg-secondary);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow) var(--color-shadow);
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-  }
-
-  label {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 0.5rem;
-    margin-right: 8px;
-    margin-top: 1rem;
-    text-transform: lowercase;
-  }
-
-  .error {
-    font-family: Poppins;
-    background-color: red;
-    color: white;
-    border-radius: var(--border-radius);
-    padding: 0.5rem;
-  }
-
-  .error-button {
-    border-radius: 100%;
-    border: 1px solid white;
-    background-color: transparent;
-    color: white;
-    padding: 0 0.3rem;
-    margin: 0;
-    margin-left: 8px;
-  }
-</style>
-
-<h1>Login</h1>
-<section>
-  <form id="login-form" on:submit|preventDefault={handleLogin}>
+<div
+  class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+>
+  <div class="max-w-md w-full space-y-8">
+    <div>
+      <h1 class="text-center text-5xl text-gray-400">MEMBRAIN</h1>
+      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        Sign in to your account
+      </h2>
+      <p class="mt-2 text-center text-sm text-gray-600">
+        Or
+        <a
+          href="/signup"
+          class="font-medium text-yellow-600 hover:text-yellow-500"
+        >
+          signup for a free account
+        </a>
+      </p>
+    </div>
     {#if error}
-      <div class="error">
-        {error}
-        <button class="error-button" on:click={() => (error = '')}>x</button>
-      </div>
+      <Error {error} />
     {/if}
-    <label for="login-username">Username</label>
-    <input
-      id="login-username"
-      type="text"
-      required
-      placeholder="Username"
-      bind:value={username} />
-    <label for="login-password">Password</label>
-    <input
-      id="login-password"
-      type="password"
-      required
-      placeholder="Password"
-      bind:value={password} />
-    <label> <input type="checkbox" bind:value={remember} /> Remember Me </label>
-    <button type="submit" disabled={submitting}>Login</button>
-  </form>
-</section>
+    <form class="mt-8 space-y-6" on:submit|preventDefault={handleLogin}>
+      <input type="hidden" name="remember" value="true" />
+      <div class="rounded-md shadow-sm -space-y-px">
+        <div>
+          <label for="username" class="sr-only">Username</label>
+          <input
+            bind:value={username}
+            id="username"
+            name="username"
+            type="text"
+            autocomplete="off"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+            placeholder="Username"
+          />
+        </div>
+        <div>
+          <label for="password" class="sr-only">Password</label>
+          <input
+            bind:value={password}
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-yellow-500 focus:border-yellow-500 focus:z-10 sm:text-sm"
+            placeholder="Password"
+          />
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input
+            bind:value={remember}
+            id="remember-me"
+            name="remember-me"
+            type="checkbox"
+            class="h-4 w-4 text-yellow-600 focus:ring-yellow-500 border-gray-300 rounded"
+          />
+          <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+            Remember me
+          </label>
+        </div>
+        <!--
+        <div class="text-sm">
+          <a href="#" class="font-medium text-yellow-600 hover:text-yellow-500">
+            Forgot your password?
+          </a>
+        </div>
+        -->
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          disabled={submitting}
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+        >
+          <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+            <!-- Heroicon name: solid/lock-closed -->
+            <svg
+              class="h-5 w-5 text-yellow-500 group-hover:text-yellow-400"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </span>
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

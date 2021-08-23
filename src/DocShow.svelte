@@ -188,11 +188,15 @@
 
   <header class="bg-white shadow overflow-hidden sm:rounded-lg">
     <div class="px-4 py-5 sm:px-6">
-      <a
-        href="/new"
+      <button
         class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium float-right"
-        >New Document</a
+        on:click={remove}>Delete</button
       >
+      <a
+        class="mx-4 bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium float-right"
+        href="/edit/{id}"><b>Edit</b></a
+      >
+
       <h3 class="text-lg leading-6 font-medium text-gray-900">View Document</h3>
       <p class="mt-1 max-w-2xl text-sm text-gray-500">
         Document Title, Description, Content and tags.
@@ -215,30 +219,15 @@
           </div>
           <div class="sm:col-span-2">
             <dt class="text-sm font-medium text-gray-500">Content</dt>
-            <dd class="mt-1 text-sm text-gray-900">{doc.content}</dd>
+            <dd class="mt-1 text-sm text-gray-900">
+              <pre><code>{doc.content}</code></pre>
+            </dd>
           </div>
           <div class="sm:col-span-2">
             <dt class="text-sm font-medium text-gray-500">Tags</dt>
             <dd class="mt-1 text-sm text-gray-900">{doc.tags}</dd>
           </div>
         </dl>
-      </div>
-
-      <div class="pt-5 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-        <div class="sm:col-span-4 flex justify-end">
-          <a
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-            href="/list"><b>List</b></a
-          >
-          <a
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-            href="/edit/{id}"><b>Edit</b></a
-          >
-          <button
-            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-            on:click={remove}>Delete</button
-          >
-        </div>
       </div>
     </div>
   </main>
